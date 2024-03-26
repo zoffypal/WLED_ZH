@@ -22,10 +22,10 @@ bool handleIfNoneMatchCacheHeader(AsyncWebServerRequest* request);
 void setStaticContentCacheHeaders(AsyncWebServerResponse *response);
 
 // define flash strings once (saves flash memory)
-static const char s_redirecting[] PROGMEM = "Redirecting...";
+static const char s_redirecting[] PROGMEM = "重定向中...";
 static const char s_content_enc[] PROGMEM = "Content-Encoding";
-static const char s_unlock_ota [] PROGMEM = "Please unlock OTA in security settings!";
-static const char s_unlock_cfg [] PROGMEM = "Please unlock settings using PIN code!";
+static const char s_unlock_ota [] PROGMEM = "请在安全设置中解锁 OTA!";
+static const char s_unlock_cfg [] PROGMEM = "请使用 PIN 码解锁设置!";
 
 //Is this an IP?
 bool isIp(String str) {
@@ -86,7 +86,7 @@ void createEditHandler(bool enable) {
     #endif
   } else {
     editHandler = &server.on(SET_F("/edit"), HTTP_ANY, [](AsyncWebServerRequest *request){
-      serveMessage(request, 401, F("Access Denied"), FPSTR(s_unlock_cfg), 254);
+      serveMessage(request, 401, F("鉴权失败"), FPSTR(s_unlock_cfg), 254);
     });
   }
 }
@@ -161,7 +161,7 @@ void initServer()
   });
 
   server.on(SET_F("/reset"), HTTP_GET, [](AsyncWebServerRequest *request){
-    serveMessage(request, 200,F("Rebooting now..."),F("Please wait ~10 seconds..."),129);
+    serveMessage(request, 200,F("重启中..."),F("请等待 ~10 秒..."),129);
     doReboot = true;
   });
 
@@ -284,7 +284,7 @@ void initServer()
   //init ota page
   server.on(SET_F("/update"), HTTP_GET, [](AsyncWebServerRequest *request){
     if (otaLock) {
-      serveMessage(request, 401, F("Access Denied"), FPSTR(s_unlock_ota), 254);
+      serveMessage(request, 401, F("鉴权失败"), FPSTR(s_unlock_ota), 254);
     } else
       serveSettings(request); // checks for "upd" in URL and handles PIN
   });
@@ -295,13 +295,13 @@ void initServer()
       return;
     }
     if (otaLock) {
-      serveMessage(request, 401, F("Access Denied"), FPSTR(s_unlock_ota), 254);
+      serveMessage(request, 401, F("鉴权失败"), FPSTR(s_unlock_ota), 254);
       return;
     }
     if (Update.hasError()) {
-      serveMessage(request, 500, F("Update failed!"), F("Please check your file and retry!"), 254);
+      serveMessage(request, 500, F("升级失败!"), F("请检查您的文件并重试!"), 254);
     } else {
-      serveMessage(request, 200, F("Update successful!"), F("Rebooting..."), 131);
+      serveMessage(request, 200, F("升级成功!"), F("重启中..."), 131);
       doReboot = true;
     }
   },[](AsyncWebServerRequest *request, String filename, size_t index, uint8_t *data, size_t len, bool final){
@@ -500,7 +500,7 @@ void serveMessage(AsyncWebServerRequest* request, uint16_t code, const String& h
   messageSub = subl;
   optionType = optionT;
 
-  request->send_P(code, "text/html", PAGE_msg, msgProcessor);
+  request->send_P(code, "text/html;charset=utf-8", PAGE_msg, msgProcessor);
 }
 
 
@@ -596,19 +596,19 @@ void serveSettings(AsyncWebServerRequest* request, bool post)
     char s2[45] = "";
 
     switch (subPage) {
-      case SUBPAGE_WIFI   : strcpy_P(s, PSTR("WiFi")); strcpy_P(s2, PSTR("Please connect to the new IP (if changed)")); forceReconnect = true; break;
+      case SUBPAGE_WIFI   : strcpy_P(s, PSTR("WiFi")); strcpy_P(s2, PSTR("请连接到新 IP(如已更改)")); forceReconnect = true; break;
       case SUBPAGE_LEDS   : strcpy_P(s, PSTR("LED")); break;
       case SUBPAGE_UI     : strcpy_P(s, PSTR("UI")); break;
       case SUBPAGE_SYNC   : strcpy_P(s, PSTR("Sync")); break;
       case SUBPAGE_TIME   : strcpy_P(s, PSTR("Time")); break;
-      case SUBPAGE_SEC    : strcpy_P(s, PSTR("Security")); if (doReboot) strcpy_P(s2, PSTR("Rebooting, please wait ~10 seconds...")); break;
+      case SUBPAGE_SEC    : strcpy_P(s, PSTR("Security")); if (doReboot) strcpy_P(s2, PSTR("重新启动，请等待 ~10 秒...")); break;
       case SUBPAGE_DMX    : strcpy_P(s, PSTR("DMX")); break;
       case SUBPAGE_UM     : strcpy_P(s, PSTR("Usermods")); break;
       case SUBPAGE_2D     : strcpy_P(s, PSTR("2D")); break;
-      case SUBPAGE_PINREQ : strcpy_P(s, correctPIN ? PSTR("PIN accepted") : PSTR("PIN rejected")); break;
+      case SUBPAGE_PINREQ : strcpy_P(s, correctPIN ? PSTR("PIN 正确") : PSTR("PIN 错误")); break;
     }
 
-    if (subPage != SUBPAGE_PINREQ) strcat_P(s, PSTR(" settings saved."));
+    if (subPage != SUBPAGE_PINREQ) strcat_P(s, PSTR(" 设置已保存!"));
 
     if (subPage == SUBPAGE_PINREQ && correctPIN) {
       subPage = originalSubPage; // on correct PIN load settings page the user intended

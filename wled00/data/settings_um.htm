@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
-	<title>Usermod Settings</title>
+	<title>用户模组</title>
 	<script>
 	var d = document;
 	d.max_gpio = 50;
@@ -171,7 +171,7 @@
 				for (var j = -1; j <= d.max_gpio; j++) {
 					if (d.rsvd.includes(j)) continue;
 					let foundPin = pins.indexOf(j);
-					let txt = (j === -1) ? "unused" : `${j}`;
+					let txt = (j === -1) ? "未使用" : `${j}`;
 					if (foundPin >= 0 && j !== v) txt += ` ${pinO[foundPin]=="if"?"global":pinO[foundPin]}`; // already reserved pin
 					if (d.ro_gpio.includes(j)) txt += " (R/O)";
 					let opt = addOption(sel, txt, j);
@@ -199,7 +199,7 @@
 			Array.from(sel.options).forEach((i)=>{
 				if (!(i.value==oldV || i.value==e.value)) return;
 				if (i.value == -1) {
-					i.text = "unused";
+					i.text = "未使用";
 					return
 				}
 				if (i.value<100) { // TODO remove this hack and use d.extra
@@ -298,7 +298,7 @@
 					addField(k,'unknown',o);
 				}
 			}
-			if (urows==="") urows = "Usermods configuration not found.<br>Press <i>Save</i> to initialize defaults.";
+			if (urows==="") urows = "未找到 Usermods 配置。<br>按下 <i>保存</i> 来初始化默认值。";
 			gId("um").innerHTML = urows;
 			loadJS(getURL('/settings/s.js?p=8'), false);	// If we set async false, file is loaded and executed, then next statement is processed
 		})
@@ -319,25 +319,25 @@
 	<form id="form_s" name="Sf" method="post" onsubmit="svS(event)">
 		<div class="toprow">
 		<div class="helpB"><button type="button" onclick="H()">?</button></div>
-		<button type="button" onclick="B()">Back</button><button type="submit">Save</button><br>
-		<span id="lssuc" style="color:green; display:none">&#10004; Configuration saved!</span>
-		<span id="lserr" style="color:red; display:none">&#9888; Could not load configuration.</span><hr>
+		<button type="button" onclick="B()">返回</button><button type="submit">保存</button><br>
+		<span id="lssuc" style="color:green; display:none">&#10004; 配置已保存！</span>
+		<span id="lserr" style="color:red; display:none">&#9888; 无法加载配置。</span><hr>
 		</div>
-		<h2>Usermod Setup</h2>
-		Global I<sup>2</sup>C GPIOs (HW)<br>
-		<i class="warn">(change requires reboot!)</i><br>
-		SDA:<input type="number" min="-1" max="48" name="SDA" onchange="check(this,'if')" class="s" placeholder="SDA">
+		<h2>用户模组</h2>
+		全局 I<sup>2</sup>C 引脚 (HW)<br>
+		<i class="warn">(更改需要重启!)</i><br>
+		SDA:<input type="number" min="-1" max="48" name="SDA" onchange="check(this,'if')" class="s" placeholder="SDA"><br>
 		SCL:<input type="number" min="-1" max="48" name="SCL" onchange="check(this,'if')" class="s" placeholder="SCL">
 		<hr class="sml">
-		Global SPI GPIOs (HW)<br>
-		<i class="warn">(only changable on ESP32, change requires reboot!)</i><br>
-		MOSI:<input type="number" min="-1" max="48" name="MOSI" onchange="check(this,'if')" class="s" placeholder="MOSI">
-		MISO:<input type="number" min="-1" max="48" name="MISO" onchange="check(this,'if')" class="s" placeholder="MISO">
+		全局 SPI 引脚 (HW)<br>
+		<i class="warn">(仅在 ESP32 上可更改，更改需要重启!)</i><br>
+		MOSI:<input type="number" min="-1" max="48" name="MOSI" onchange="check(this,'if')" class="s" placeholder="MOSI"><br>
+		MISO:<input type="number" min="-1" max="48" name="MISO" onchange="check(this,'if')" class="s" placeholder="MISO"><br>
 		SCLK:<input type="number" min="-1" max="48" name="SCLK" onchange="check(this,'if')" class="s" placeholder="SCLK">
 		<hr class="sml">
-		Reboot after save? <input type="checkbox" name="RBT"><br>
-		<div id="um">Loading settings...</div>
-		<hr><button type="button" onclick="B()">Back</button><button type="submit">Save</button>
+		保存后重新启动？<input type="checkbox" name="RBT"><br>
+		<div id="um">正在加载设置...</div>
+		<hr><button type="button" onclick="B()">返回</button><button type="submit">保存</button>
 	</form>
 </body>
 

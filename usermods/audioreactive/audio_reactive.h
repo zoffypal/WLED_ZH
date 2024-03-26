@@ -1764,46 +1764,46 @@ class AudioReactive : public Usermod {
     {
       oappend(SET_F("dd=addDropdown('AudioReactive','digitalmic:type');"));
     #if  !defined(CONFIG_IDF_TARGET_ESP32S2) && !defined(CONFIG_IDF_TARGET_ESP32C3) && !defined(CONFIG_IDF_TARGET_ESP32S3)
-      oappend(SET_F("addOption(dd,'Generic Analog',0);"));
+      oappend(SET_F("addOption(dd,'通用 Analog',0);"));
     #endif
-      oappend(SET_F("addOption(dd,'Generic I2S',1);"));
+      oappend(SET_F("addOption(dd,'通用 I2S',1);"));
       oappend(SET_F("addOption(dd,'ES7243',2);"));
       oappend(SET_F("addOption(dd,'SPH0654',3);"));
-      oappend(SET_F("addOption(dd,'Generic I2S with Mclk',4);"));
+      oappend(SET_F("addOption(dd,'通用 I2S 带 Mclk',4);"));
     #if  !defined(CONFIG_IDF_TARGET_ESP32S2) && !defined(CONFIG_IDF_TARGET_ESP32C3)
-      oappend(SET_F("addOption(dd,'Generic I2S PDM',5);"));
+      oappend(SET_F("addOption(dd,'通用 I2S PDM',5);"));
     #endif
     oappend(SET_F("addOption(dd,'ES8388',6);"));
     
       oappend(SET_F("dd=addDropdown('AudioReactive','config:AGC');"));
-      oappend(SET_F("addOption(dd,'Off',0);"));
-      oappend(SET_F("addOption(dd,'Normal',1);"));
-      oappend(SET_F("addOption(dd,'Vivid',2);"));
-      oappend(SET_F("addOption(dd,'Lazy',3);"));
+      oappend(SET_F("addOption(dd,'关闭',0);"));
+      oappend(SET_F("addOption(dd,'正常',1);"));
+      oappend(SET_F("addOption(dd,'敏感',2);"));
+      oappend(SET_F("addOption(dd,'迟缓',3);"));
 
       oappend(SET_F("dd=addDropdown('AudioReactive','dynamics:limiter');"));
-      oappend(SET_F("addOption(dd,'Off',0);"));
-      oappend(SET_F("addOption(dd,'On',1);"));
-      oappend(SET_F("addInfo('AudioReactive:dynamics:limiter',0,' On ');"));  // 0 is field type, 1 is actual field
-      oappend(SET_F("addInfo('AudioReactive:dynamics:rise',1,'ms <i>(&#x266A; effects only)</i>');"));
-      oappend(SET_F("addInfo('AudioReactive:dynamics:fall',1,'ms <i>(&#x266A; effects only)</i>');"));
+      oappend(SET_F("addOption(dd,'关闭',0);"));
+      oappend(SET_F("addOption(dd,'打开',1);"));
+      oappend(SET_F("addInfo('AudioReactive:dynamics:limiter',0,' 启用 ');"));  // 0 is field type, 1 is actual field
+      oappend(SET_F("addInfo('AudioReactive:dynamics:rise',1,'毫秒 <i>(仅 &#x266A; 效果)</i>');"));
+      oappend(SET_F("addInfo('AudioReactive:dynamics:fall',1,'毫秒 <i>(仅 &#x266A; 效果)</i>');"));
 
       oappend(SET_F("dd=addDropdown('AudioReactive','frequency:scale');"));
-      oappend(SET_F("addOption(dd,'None',0);"));
-      oappend(SET_F("addOption(dd,'Linear (Amplitude)',2);"));
-      oappend(SET_F("addOption(dd,'Square Root (Energy)',3);"));
-      oappend(SET_F("addOption(dd,'Logarithmic (Loudness)',1);"));
+      oappend(SET_F("addOption(dd,'关闭',0);"));
+      oappend(SET_F("addOption(dd,'线性 (振幅)',2);"));
+      oappend(SET_F("addOption(dd,'平方根 (能量)',3);"));
+      oappend(SET_F("addOption(dd,'对数 (响度)',1);"));
 
       oappend(SET_F("dd=addDropdown('AudioReactive','sync:mode');"));
-      oappend(SET_F("addOption(dd,'Off',0);"));
-      oappend(SET_F("addOption(dd,'Send',1);"));
-      oappend(SET_F("addOption(dd,'Receive',2);"));
-      oappend(SET_F("addInfo('AudioReactive:digitalmic:type',1,'<i>requires reboot!</i>');"));  // 0 is field type, 1 is actual field
+      oappend(SET_F("addOption(dd,'关闭',0);"));
+      oappend(SET_F("addOption(dd,'发送',1);"));
+      oappend(SET_F("addOption(dd,'接收',2);"));
+      oappend(SET_F("addInfo('AudioReactive:digitalmic:type',1,'<i>需要重启!</i>');"));  // 0 is field type, 1 is actual field
       oappend(SET_F("addInfo('AudioReactive:digitalmic:pin[]',0,'<i>sd/data/dout</i>','I2S SD');"));
       oappend(SET_F("addInfo('AudioReactive:digitalmic:pin[]',1,'<i>ws/clk/lrck</i>','I2S WS');"));
       oappend(SET_F("addInfo('AudioReactive:digitalmic:pin[]',2,'<i>sck/bclk</i>','I2S SCK');"));
       #if !defined(CONFIG_IDF_TARGET_ESP32S2) && !defined(CONFIG_IDF_TARGET_ESP32C3) && !defined(CONFIG_IDF_TARGET_ESP32S3)
-        oappend(SET_F("addInfo('AudioReactive:digitalmic:pin[]',3,'<i>only use -1, 0, 1 or 3</i>','I2S MCLK');"));
+        oappend(SET_F("addInfo('AudioReactive:digitalmic:pin[]',3,'<i>仅 -1, 0, 1 或 3</i>','I2S MCLK');"));
       #else
         oappend(SET_F("addInfo('AudioReactive:digitalmic:pin[]',3,'<i>master clock</i>','I2S MCLK');"));
       #endif

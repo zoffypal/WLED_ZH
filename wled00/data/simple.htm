@@ -54,8 +54,8 @@
 </head>
 <body>
 
-<div id="cv" class="overlay">Loading WLED UI...</div>
-<noscript><div class="overlay" style="opacity:1;">Sorry, WLED UI needs JavaScript!</div></noscript>
+<div id="cv" class="overlay">加载 WLED UI...</div>
+<noscript><div class="overlay" style="opacity:1;">错误,WLED UI 需要 JavaScript!</div></noscript>
 <div id="bg"></div>
 
 <div class="wrapper" id="top">
@@ -69,7 +69,7 @@
             <!--button id="buttonBri" onclick="tglBri()"><i class="icons">&#xe2a6;</i><p class="tab-label">Brightness</p></button-->
 		</div>
 		<div id="briwrap">
-			<p class="label hd">Global brightness</p>
+			<p class="label hd">全局亮度</p>
 			<div class="il">
 				<i class="icons slider-icon" onclick="tglTheme()">&#xe2a6;</i>
 				<div class="sliderwrap il">
@@ -85,12 +85,12 @@
 <div class ="container">
     <div class="tabcontent">
 		<div id="QuickLoad" class="center">
-			<p class="label h">Quick Load</p>
+			<p class="label h">快捷标签</p>
         	<div id="pql"></div>
 		</div>
 
 		<div id="QCS" class="center">
-			<p class="label h">Solid color</p>
+			<p class="label h">单纯色彩</p>
 			<div id="qcs-w" class="center">
 				<div class="qcs" onclick="pC('#ff0000');" title="Red" style="background-color:#ff0000;"></div>
 				<div class="qcs" onclick="pC('#ffa000');" title="Orange" style="background-color:#ffa000;"></div>
@@ -124,7 +124,7 @@
 				</div>
 			</div>
 			<div id="rgbwrap" class="center">
-				<p class="label h">RGB channels</p>
+				<p class="label h">RGB 通道</p>
 				<div id="rwrap" class="il">
 					<div class="sliderwrap il">
 						<input id="sliderR" class="noslide" onchange="fromRgb()" max="255" min="0" type="range" value="128" />
@@ -145,14 +145,14 @@
 				</div><br>
 			</div>
 			<div id="wwrap" class="center">
-				<p class="label h">White channel</p>
+				<p class="label h">白通道</p>
 				<div class="sliderwrap il">
 					<input id="sliderW" class="noslide" onchange="setColor(0)" max="255" min="0" type="range" value="128" />
 					<div class="sliderdisplay"></div>
 				</div>
 			</div>
 			<div id="wbal">
-				<p class="label h">White balance</p>
+				<p class="label h">白平衡</p>
 				<div class="sliderwrap il">
 					<input id="sliderA" class="noslide" onchange="setBalance(this.value)" max="255" min="0" type="range" value="128" />
 					<div class="sliderdisplay"></div>
@@ -174,7 +174,7 @@
 		</div>
 
 		<div id="Presets" class="center">
-        	<p class="label h">Presets</p>
+        	<p class="label h">预设</p>
 			<div class="fnd">
 				<input type="text" class="fnd" placeholder="Search" oninput="search(this,'pcont')" onfocus="search(this)" />
 				<i class="icons clear-icon" onclick="clean(this);">&#xe38f;</i>
@@ -184,7 +184,7 @@
 		</div>
 
 		<div id="Effects" class="center">
-			<p class="label h">Effect</p>
+			<p class="label h">效果</p>
 			<div title="Effect speed">
 				<i class="icons slider-icon">&#xe325;</i>
 				<div class="sliderwrap il">
@@ -238,22 +238,22 @@
 	<div id="imgw">
 		<img class="wi" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAFCAYAAAC5Fuf5AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABbSURBVChTlY9bDoAwDMNW7n9nwCipytQN4Z8tbrTHmDmF4oPzyldwRqp1SSdnV/NuZuzqerAByxXznBw3igkeFEfXyUuhK/yFM0CxJfyqXZEOc6/Sr9/bf7uIC5Nwd7orMvAPAAAAAElFTkSuQmCC" />
 	</div><br>
-	<div id="kv">Loading...</div><br>
+	<div id="kv">加载中...</div><br>
 	<div>
-	<button class="btn" onclick="requestJson()">Refresh</button>
-	<button class="btn" onclick="toggleInfo()">Close Info</button>
-	<button class="btn" onclick="toggleNodes()">Instance List</button>
-	<button class="btn" id="resetbtn" onclick="cnfReset()">Reboot WLED</button>
+	<button class="btn" onclick="requestJson()">刷新信息</button>
+	<button class="btn" onclick="toggleInfo()">关闭信息</button>
+	<button class="btn" onclick="toggleNodes()">实例列表</button>
+	<button class="btn" id="resetbtn" onclick="cnfReset()">重启 WLED</button>
 	</div>
 	<span class="h">Made with <span id="heart">&#10084;&#xFE0E;</span> by Aircoookie and the <a href="https://wled.discourse.group/" target="_blank">WLED community</a></span>
 </div>
 
 <div id="nodes" class="modal">
-	<div id="ndlt">WLED instances</div>
-	<div id="kn">Loading...</div><br>
+	<div id="ndlt">WLED 实例</div>
+	<div id="kn">加载中...</div><br>
 	<div>
-	<button class="btn" onclick="loadNodes()">Refresh</button>
-	<button class="btn" onclick="toggleNodes()">Close list</button>
+	<button class="btn" onclick="loadNodes()">刷新</button>
+	<button class="btn" onclick="toggleNodes()">关闭列表</button>
 	</div>
 </div>
 

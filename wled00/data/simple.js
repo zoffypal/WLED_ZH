@@ -268,7 +268,7 @@ function showErrorToast()
 		ws = null;
 		if (lastinfo.ws > -1) setTimeout(makeWS,500);
 	}
-	showToast('Connection to light failed!', true);
+	showToast('连接灯光失败!', true);
 }
 
 function clearErrorToast() {gId("toast").className = gId("toast").className.replace("error", "");}
@@ -327,7 +327,7 @@ function cpBck()
 	copyText.select();
 	copyText.setSelectionRange(0, 999999);
 	d.execCommand("copy");
-	showToast("Copied to clipboard!");
+	showToast("复制到剪贴板!");
 }
 
 function loadPresets(callback = null)
@@ -625,7 +625,7 @@ function loadNodes()
 		method: 'get'
 	})
 	.then(res => {
-		if (!res.ok) showToast('Could not load Node list!', true);
+		if (!res.ok) showToast('无法加载节点列表!', true);
 		return res.json();
 	})
 	.then(json => {
@@ -920,7 +920,7 @@ function readState(s,command=false)
 	}
 	var i=s.seg[selc];
 	if (!i) {
-		showToast('No Segments!', true);
+		showToast('无区段!', true);
 		updateUI();
 		return;
 	}
@@ -952,22 +952,22 @@ function readState(s,command=false)
 	  var errstr = "";
 	  switch (s.error) {
 		case 10:
-		  errstr = "Could not mount filesystem!";
+		  errstr = "无法挂载文件系统!";
 		  break;
 		case 11:
-		  errstr = "Not enough space to save preset!";
+		  errstr = "保存预设的空间不足!";
 		  break;
 		case 12:
-		  errstr = "Preset not found.";
+		  errstr = "未找到预设。";
 		  break;
 		case 13:
-		  errstr = "Missing IR.json.";
+		  errstr = "缺少 ir.json 文件。";
 		  break;
 		case 19:
-		  errstr = "A filesystem error has occurred.";
+		  errstr = "文件系统发生错误。";
 		  break;
 		}
-	  showToast('Error ' + s.error + ": " + errstr, true);
+	  showToast('错误 ' + s.error + ": " + errstr, true);
 	}
 
 	selectedPal = i.pal;
@@ -1017,7 +1017,7 @@ function requestJson(command=null)
 		lastUpdate = new Date();
 		clearErrorToast();
 		gId('connind').style.backgroundColor = "var(--c-g)";
-		if (!json) { showToast('Empty response', true); return; }
+		if (!json) { showToast('无回复', true); return; }
 		if (json.success) return;
 		if (json.info) {
 			lastinfo = json.info;
@@ -1172,7 +1172,7 @@ function setPreset(i)
 {
 	var obj = {"ps": i};
 	if (isPlaylist(i)) obj.on = true;
-	showToast("Loading preset " + pName(i) +" (" + i + ")");
+	showToast("加载预设中 " + pName(i) +" (" + i + ")");
 	requestJson(obj);
 }
 
@@ -1289,7 +1289,7 @@ function cnfReset()
 	if (!cnfr) {
 		var bt = gId('resetbtn');
 		bt.style.color = "#f00";
-		bt.innerHTML = "Confirm Reboot";
+		bt.innerHTML = "确认重启";
 		cnfr = true; return;
 	}
 	window.location.href = "/reset";

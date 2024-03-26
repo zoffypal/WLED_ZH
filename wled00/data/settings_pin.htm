@@ -3,7 +3,7 @@
 <head>
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
 	<meta charset="utf-8">
-	<title>PIN required</title>
+	<title>需要 PIN 码解锁</title>
 	<script>
 		var d = document;
 		function B() { window.open("../settings","_self"); }
@@ -14,10 +14,10 @@
 </head>
 <body onload="d.getElementsByName('PIN')[0].focus()">
 	<form id="form_s" name="Sf" method="post">
-		<h2>Please enter settings PIN code</h2>
+		<h2>请输入配置 PIN 码</h2>
 		<input type="password" name="PIN" size="4" maxlength="4" minlength="4" pattern="[0-9]*" inputmode="numeric" autofocus>
 		<hr>
-		<button type="button" onclick="B()">Back</button><button type="submit">Submit</button>
+		<button type="button" onclick="B()">返回</button><button type="submit">提交</button>
 	</form>
 </body>
 </html>

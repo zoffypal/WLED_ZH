@@ -3,7 +3,7 @@
 <head>
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
 	<meta charset="utf-8">
-	<title>Sync Settings</title>
+	<title>同步配置</title>
 	<script>var d=document;
 	var loc = false, locip, locproto = "http:";
 	function gId(s){return d.getElementById(s);}
@@ -85,13 +85,13 @@
 <form id="form_s" name="Sf" method="post" onsubmit="GC()">
 <div class="toprow">
 <div class="helpB"><button type="button" onclick="H()">?</button></div>
-<button type="button" onclick="B()">Back</button><button type="submit">Save</button><hr>
+<button type="button" onclick="B()">返回</button><button type="submit">保存</button><hr>
 </div>
-<h2>Sync setup</h2>
-<h3>WLED Broadcast</h3>
-UDP Port: <input name="UP" type="number" min="1" max="65535" class="d5" required><br>
-2nd Port: <input name="U2" type="number" min="1" max="65535" class="d5" required><br>
-<h3>Sync groups</h3>
+<h2>同步配置</h2>
+<h3>WLED 广播</h3>
+UDP 端口: <input name="UP" type="number" min="1" max="65535" class="d5" required><br>
+第二端口: <input name="U2" type="number" min="1" max="65535" class="d5" required><br>
+<h3>同步光组</h3>
 <input name="GS" id="GS" type="number" style="display: none;"><!-- hidden inputs for bitwise group checkboxes -->
 <input name="GR" id="GR" type="number" style="display: none;">
 <table style="margin: 0 auto;">
@@ -107,7 +107,7 @@ UDP Port: <input name="UP" type="number" min="1" max="65535" class="d5" required
 		<td>8</td>
 	</tr>
 	<tr>
-		<td>Send:</td>
+		<td>发送: </td>
 		<td><input type="checkbox" id="G1" name="G1"></td>
 		<td><input type="checkbox" id="G2" name="G2"></td>
 		<td><input type="checkbox" id="G3" name="G3"></td>
@@ -118,7 +118,7 @@ UDP Port: <input name="UP" type="number" min="1" max="65535" class="d5" required
 		<td><input type="checkbox" id="G8" name="G8"></td>
 	</tr>
 	<tr>
-		<td>Receive:</td>
+		<td>接收: </td>
 		<td><input type="checkbox" id="R1" name="R1"></td>
 		<td><input type="checkbox" id="R2" name="R2"></td>
 		<td><input type="checkbox" id="R3" name="R3"></td>
@@ -129,112 +129,112 @@ UDP Port: <input name="UP" type="number" min="1" max="65535" class="d5" required
 		<td><input type="checkbox" id="R8" name="R8"></td>
 	</tr>
 </table><br>
-Receive: <nowrap><input type="checkbox" name="RB">Brightness,</nowrap> <nowrap><input type="checkbox" name="RC">Color,</nowrap> <nowrap>and <input type="checkbox" name="RX">Effects</nowrap><br>
-<input type="checkbox" name="SO"> Segment options, <input type="checkbox" name="SG"> bounds<br>
-Send notifications on direct change: <input type="checkbox" name="SD"><br>
-Send notifications on button press or IR: <input type="checkbox" name="SB"><br>
-Send Alexa notifications: <input type="checkbox" name="SA"><br>
-Send Philips Hue change notifications: <input type="checkbox" name="SH"><br>
-Send Macro notifications: <input type="checkbox" name="SM"><br>
-UDP packet retransmissions: <input name="UR" type="number" min="0" max="30" class="d5" required><br><br>
-<i>Reboot required to apply changes. </i>
+接收: <nowrap><input type="checkbox" name="RB">亮度，</nowrap> <nowrap><input type="checkbox" name="RC">色彩，</nowrap> <nowrap>和 <input type="checkbox" name="RX">效果</nowrap><br>
+<input type="checkbox" name="SO"> 区段配置, <input type="checkbox" name="SG"> 边界<br>
+发送直接更改通知: <input type="checkbox" name="SD"><br>
+在按下按钮或 IR 时发送通知: <input type="checkbox" name="SB"><br>
+发送 Alexa 通知: <input type="checkbox" name="SA"><br>
+发送飞利浦 Hue 通知: <input type="checkbox" name="SH"><br>
+发送宏通知: <input type="checkbox" name="SM"><br>
+UDP 数据包重传: <input name="UR" type="number" min="0" max="30" class="d5" required><br><br>
+<i>需要重新启动才能应用更改。</i>
 <hr class="sml">
-<h3>Instance List</h3>
-Enable instance list: <input type="checkbox" name="NL"><br>
-Make this instance discoverable: <input type="checkbox" name="NB">
+<h3>同步列表</h3>
+启用同步列表: <input type="checkbox" name="NL"><br>
+设备可被发现: <input type="checkbox" name="NB">
 <hr class="sml">
-<h3>Realtime</h3>
-Receive UDP realtime: <input type="checkbox" name="RD"><br>
-Use main segment only: <input type="checkbox" name="MO"><br><br>
-<i>Network DMX input</i><br>
-Type:
+<h3>实时信息</h3>
+实时接收 UDP: <input type="checkbox" name="RD"><br>
+仅使用主区段: <input type="checkbox" name="MO"><br><br>
+<i>网络 DMX 输入</i><br>
+状态: 
 <select name=DI onchange="SP(); adj();">
 <option value=5568>E1.31 (sACN)</option>
 <option value=6454>Art-Net</option>
-<option value=0 selected>Custom port</option>
+<option value=0 selected>自定义端口</option>
 </select><br>
-<div id=xp>Port: <input name="EP" type="number" min="1" max="65535" value="5568" class="d5" required><br></div>
-Multicast: <input type="checkbox" name="EM"><br>
-Start universe: <input name="EU" type="number" min="0" max="63999" required><br>
-<i>Reboot required.</i> Check out <a href="https://github.com/LedFx/LedFx" target="_blank">LedFx</a>!<br>
-Skip out-of-sequence packets: <input type="checkbox" name="ES"><br>
-DMX start address: <input name="DA" type="number" min="1" max="510" required><br>
-DMX segment spacing: <input name="XX" type="number" min="0" max="150" required><br>
-E1.31 port priority: <input name="PY" type="number" min="0" max="200" required><br>
-DMX mode:
+<div id=xp>端口: <input name="EP" type="number" min="1" max="65535" value="5568" class="d5" required><br></div>
+组播: <input type="checkbox" name="EM"><br>
+初始: <input name="EU" type="number" min="0" max="63999" required><br>
+<i>需要重新启动。</i> 请查看 <a href="https://github.com/LedFx/LedFx" target="_blank">LedFx</a>!<br>
+跳过失序数据包。<input type="checkbox" name="ES"><br>
+DMX 起始地址: <input name="DA" type="number" min="1" max="510" required><br>
+DMX 区段间距: <input name="XX" type="number" min="0" max="150" required><br>
+E1.31 端口优先级: <input name="PY" type="number" min="0" max="200" required><br>
+DMX 模式: 
 <select name=DM>
-<option value=0>Disabled</option>
-<option value=1>Single RGB</option>
-<option value=2>Single DRGB</option>
-<option value=3>Effect</option>
-<option value=7>Effect + White</option>
-<option value=8>Effect Segment</option>
-<option value=9>Effect Segment + White</option>
-<option value=4>Multi RGB</option>
-<option value=5>Dimmer + Multi RGB</option>
-<option value=6>Multi RGBW</option>
-<option value=10>Preset</option>
+<option value=0>关闭</option>
+<option value=1>单通道 RGB</option>
+<option value=2>单通道 DRGB</option>
+<option value=3>效果</option>
+<option value=7>效果 + 白配置</option>
+<option value=8>效果分段</option>
+<option value=9>效果区段 + 白配置</option>
+<option value=4>混合 RGB</option>
+<option value=5>调光器 + 混合 RGB</option>
+<option value=6>混合 RGBW</option>
+<option value=10>预设</option>
 </select><br>
-<a href="https://kno.wled.ge/interfaces/e1.31-dmx/" target="_blank">E1.31 info</a><br>
-Timeout: <input name="ET" type="number" min="1" max="65000" required> ms<br>
-Force max brightness: <input type="checkbox" name="FB"><br>
-Disable realtime gamma correction: <input type="checkbox" name="RG"><br>
-Realtime LED offset: <input name="WO" type="number" min="-255" max="255" required>
+<a href="https://kno.wled.ge/interfaces/e1.31-dmx/" target="_blank">E1.31 信息</a><br>
+超时时间: <input name="ET" type="number" min="1" max="65000" required> 毫秒<br>
+强制最大亮度: <input type="checkbox" name="FB"><br>
+禁用实时伽玛校正: <input type="checkbox" name="RG"><br>
+实时 LED 偏移: <input name="WO" type="number" min="-255" max="255" required>
 <hr class="sml">
-<h3>Alexa Voice Assistant</h3>
+<h3>Alexa 语音助理</h3>
 <div id="NoAlexa" class="hide">
-	<i class="warn">This firmware build does not include Alexa support.<br></i><br>
+	<i class="warn">此固件版本不支持 Alexa。<br></i><br>
 </div>
 <div id="Alexa">
-Emulate Alexa device: <input type="checkbox" name="AL"><br>
-Alexa invocation name: <input type="text" name="AI" maxlength="32"><br>
-Also emulate devices to call the first <input name="AP" type="number" class="s" min="0" max="9" required> presets<br><br>
+模拟 Alexa 设备: <input type="checkbox" name="AL"><br>
+Alexa 调用名称: <input type="text" name="AI" maxlength="32"><br>
+同时模拟设备调用第一个 <input name="AP" type="number" class="s" min="0" max="9" required> 预设<br><br>
 </div>
 <hr class="sml">
-<div class="warn">&#9888; <b>MQTT and Hue sync all connect to external hosts!<br>
-This may impact the responsiveness of WLED.</b><br>
+<div class="warn">&#9888; <b>同时开启 MQTT 和 Hue 同步资源使用较大！<br>
+这可能会影响 WLED 的响应速度。</b><br>
 </div>
-For best results, only use one of these services at a time.<br>
-(alternatively, connect a second ESP to them and use the UDP sync)
+为获得最佳效果，每次只使用其中一个服务。<br>
+(或者，将第二个 ESP 连接到它们并使用 UDP 同步)
 <hr class="sml">
-<h3>MQTT</h3>
+<h3>MQTT 消息队列</h3>
 <div id="NoMQTT" class="hide">
-	<i class="warn">This firmware build does not include MQTT support.<br></i>
+	<i class="warn">此固件版本不支持 MQTT。<br></i>
 </div>
 <div id="MQTT">
-Enable MQTT: <input type="checkbox" name="MQ"><br>
-Broker: <input type="text" name="MS" maxlength="32">
-Port: <input name="MQPORT" type="number" min="1" max="65535" class="d5"><br>
-<b>The MQTT credentials are sent over an unsecured connection.<br>
-Never use the MQTT password for another service!</b><br>
-Username: <input type="text" name="MQUSER" maxlength="40"><br>
-Password: <input type="password" name="MQPASS" maxlength="64"><br>
-Client ID: <input type="text" name="MQCID" maxlength="40"><br>
-Device Topic: <input type="text" name="MD" maxlength="32"><br>
-Group Topic: <input type="text" name="MG" maxlength="32"><br>
-Publish on button press: <input type="checkbox" name="BM"><br>
-Retain brightness & color messages: <input type="checkbox" name="RT"><br>
-<i>Reboot required to apply changes. </i><a href="https://kno.wled.ge/interfaces/mqtt/" target="_blank">MQTT info</a>
+启用 MQTT: <input type="checkbox" name="MQ"><br>
+代理(Broker): <input type="text" name="MS" maxlength="32"><br>
+端口: <input name="MQPORT" type="number" min="1" max="65535" class="d5"><br>
+<b>MQTT 凭据通过不安全的连接发送。<br>
+切勿将 MQTT 密码用于其他服务！</b><br>
+用户: <input type="text" name="MQUSER" maxlength="40"><br>
+密码: <input type="password" name="MQPASS" maxlength="64"><br>
+客户 ID: <input type="text" name="MQCID" maxlength="40"><br>
+设备 Topic: <input type="text" name="MD" maxlength="32"><br>
+设备组 Topic: <input type="text" name="MG" maxlength="32"><br>
+按下按钮时发布: <input type="checkbox" name="BM"><br>
+保留亮度和颜色信息: <input type="checkbox" name="RT"><br>
+<i>需要重启才能应用更改。</i><a href="https://kno.wled.ge/interfaces/mqtt/" target="_blank">MQTT 信息</a>
 </div>
-<h3>Philips Hue</h3>
+<h3>飞利浦 Hue</h3>
 <div id="NoHue" class="hide">
-	<em class="warn">This firmware build does not include Philips Hue support.<br></em>
+	<em class="warn">此固件版本不支持飞利浦 Hue。<br></em>
 </div>
 <div id="Hue">
-<i>You can find the bridge IP and the light number in the 'About' section of the hue app.</i><br>
-Poll Hue light <input name="HL" type="number" min="1" max="99" > every <input name="HI" type="number" min="100" max="65000"> ms: <input type="checkbox" name="HP"><br>
-Then, receive <input type="checkbox" name="HO"> On/Off, <input type="checkbox" name="HB"> Brightness, and <input type="checkbox" name="HC"> Color<br>
-Hue Bridge IP:<br>
+<i>您可以在 Hue 应用程序的 "关于 "部分找到网桥 IP 和灯光的编号。</i><br>
+轮询 Hue 灯光 <input name="HL" type="number" min="1" max="99" > 每 <input name="HI" type="number" min="100" max="65000"> 毫秒<input type="checkbox" name="HP">: <br>
+之后，接收 <input type="checkbox" name="HO"> 开/关, <input type="checkbox" name="HB"> 亮度和 <input type="checkbox" name="HC"> 色彩。<br>
+Hue 网桥 IP:<br>
 <input name="H0" type="number" class="s" min="0" max="255" > .
 <input name="H1" type="number" class="s" min="0" max="255" > .
 <input name="H2" type="number" class="s" min="0" max="255" > .
 <input name="H3" type="number" class="s" min="0" max="255" ><br>
-<b>Press the pushlink button on the bridge, after that save this page!</b><br>
-(when first connecting)<br>
-Hue status: <span class="sip"> Disabled in this build </span>
+<b>按下桥接器上的"pushlink"按钮，然后保存此页面！</b><br>
+(当第一次连接)<br>
+Hue 状态: <span class="sip"> 在此版本中已禁用 </span>
 </div>
-<h3>Serial</h3>
-Baud rate:
+<h3>串口连接</h3>
+波特率: 
 <select name=BD>
 <option value=1152>115200</option>
 <option value=2304>230400</option>
@@ -245,9 +245,9 @@ Baud rate:
 <option value=10000>1000000</option>
 <option value=15000>1500000</option>
 </select><br>
-<i>Keep at 115200 to use Improv. Some boards may not support high rates.</i>
+<i>要使用 Improv，请保持 115200 波特率。某些控制板可能不支持高速率。</i>
 <hr>
-<button type="button" onclick="B()">Back</button><button type="submit">Save</button>
+<button type="button" onclick="B()">返回</button><button type="submit">保存</button>
 </form>
 </body>
 </html>

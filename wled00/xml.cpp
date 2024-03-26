@@ -307,7 +307,7 @@ void getSettingsJS(byte subPage, char* dest)
       sappends('m',SET_F("(\"sip\")[0]"),s);
     } else
     {
-      sappends('m',SET_F("(\"sip\")[0]"),(char*)F("Not connected"));
+      sappends('m',SET_F("(\"sip\")[0]"),(char*)F("未连接网络"));
     }
 
     if (WiFi.softAPIP()[0] != 0) //is active
@@ -327,7 +327,7 @@ void getSettingsJS(byte subPage, char* dest)
       sappends('m',SET_F("(\"rlid\")[0]"),last_signal_src);
     } else if (!enable_espnow_remote)
     {
-      sappends('m',SET_F("(\"rlid\")[0]"),(char*)F("(Enable remote to listen)"));
+      sappends('m',SET_F("(\"rlid\")[0]"),(char*)F("(开启远程连接后刷新)"));
     } else 
     {
       sappends('m',SET_F("(\"rlid\")[0]"),(char*)F("None"));
@@ -558,13 +558,13 @@ void getSettingsJS(byte subPage, char* dest)
     char hueErrorString[25];
     switch (hueError)
     {
-      case HUE_ERROR_INACTIVE     : strcpy_P(hueErrorString,PSTR("Inactive"));                break;
-      case HUE_ERROR_ACTIVE       : strcpy_P(hueErrorString,PSTR("Active"));                  break;
-      case HUE_ERROR_UNAUTHORIZED : strcpy_P(hueErrorString,PSTR("Unauthorized"));            break;
-      case HUE_ERROR_LIGHTID      : strcpy_P(hueErrorString,PSTR("Invalid light ID"));        break;
-      case HUE_ERROR_PUSHLINK     : strcpy_P(hueErrorString,PSTR("Link button not pressed")); break;
-      case HUE_ERROR_JSON_PARSING : strcpy_P(hueErrorString,PSTR("JSON parsing error"));      break;
-      case HUE_ERROR_TIMEOUT      : strcpy_P(hueErrorString,PSTR("Timeout"));                 break;
+      case HUE_ERROR_INACTIVE     : strcpy_P(hueErrorString,PSTR("未激活"));                break;
+      case HUE_ERROR_ACTIVE       : strcpy_P(hueErrorString,PSTR("激活"));                  break;
+      case HUE_ERROR_UNAUTHORIZED : strcpy_P(hueErrorString,PSTR("未授权"));            break;
+      case HUE_ERROR_LIGHTID      : strcpy_P(hueErrorString,PSTR("无效灯光 ID"));        break;
+      case HUE_ERROR_PUSHLINK     : strcpy_P(hueErrorString,PSTR("按钮未按下")); break;
+      case HUE_ERROR_JSON_PARSING : strcpy_P(hueErrorString,PSTR("JSON 解析错误"));      break;
+      case HUE_ERROR_TIMEOUT      : strcpy_P(hueErrorString,PSTR("超时"));                 break;
       default: sprintf_P(hueErrorString,PSTR("Bridge Error %i"),hueError);
     }
 

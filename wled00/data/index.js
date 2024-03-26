@@ -319,7 +319,7 @@ function showToast(text, error = false)
 
 function showErrorToast()
 {
-	showToast('Connection to light failed!', true);
+	showToast('连接灯光失败!', true);
 }
 
 function clearErrorToast(n=5000)
@@ -405,7 +405,7 @@ function cpBck()
 	copyText.select();
 	copyText.setSelectionRange(0, 999999);
 	d.execCommand("copy");
-	showToast("Copied to clipboard!");
+	showToast("复制到剪贴板!");
 }
 
 function presetError(empty)
@@ -418,19 +418,19 @@ function presetError(empty)
 
 	var cn = `<div class="pres c" ${empty?'style="padding:8px;margin-top: 16px;"':'onclick="pmtLast=0;loadPresets();" style="cursor:pointer;padding:8px;margin-top: 16px;"'}>`;
 	if (empty)
-		cn += `You have no presets yet!`;
+		cn += `你还没有预设!`;
 	else
-		cn += `Sorry, there was an issue loading your presets!`;
+		cn += `抱歉,加载预设时出现问题!`;
 
 	if (hasBackup) {
 		cn += `<br><br>`;
 		if (empty)
-			cn += `However, there is backup preset data of a previous installation available.<br>
-			(Saving a preset will hide this and overwrite the backup)`;
+			cn += `不过，可以使用以前安装的备份预设数据。<br>
+			(保存预置将隐藏此功能并覆盖备份)`;
 		else
-			cn += `Here is a backup of the last known good state:`;
+			cn += `以下是最后已知良好状态的备份:`;
 		cn += `<textarea id="bck"></textarea><br>
-			<button class="btn" onclick="cpBck()">Copy to clipboard</button>`;
+			<button class="btn" onclick="cpBck()">复制到剪贴板</button>`;
 	}
 	cn += `</div>`;
 	gId('pcont').innerHTML = cn;
@@ -550,7 +550,7 @@ function populateQL()
 	var cn = "";
 	if (pQL.length > 0) {
 		pQL.sort((a,b) => (a[0]>b[0]));
-		cn += `<p class="labels hd">Quick load</p>`;
+		cn += `<p class="labels hd">快捷标签</p>`;
 		for (var key of (pQL||[])) {
 			cn += `<button class="btn btn-xs psts" id="p${key[0]}qlb" title="${key[2]?key[2]:''}" onclick="setPreset(${key[0]});">${key[1]}</button>`;
 		}
@@ -658,7 +658,7 @@ function populateInfo(i)
 	var heap = i.freeheap/1024;
 	heap = heap.toFixed(1);
 	var pwr = i.leds.pwr;
-	var pwru = "Not calculated";
+	var pwru = "未计算";
 	if (pwr > 1000) {pwr /= 1000; pwr = pwr.toFixed((pwr > 10) ? 0 : 1); pwru = pwr + " A";}
 	else if (pwr > 0) {pwr = 50 * Math.round(pwr/50); pwru = pwr + " mA";}
 	var urows="";
@@ -679,17 +679,17 @@ function populateInfo(i)
 ${urows}
 ${urows===""?'':'<tr><td colspan=2><hr style="height:1px;border-width:0;color:gray;background-color:gray"></td></tr>'}
 ${i.opt&0x100?inforow("Debug","<button class=\"btn btn-xs\" onclick=\"requestJson({'debug':"+(i.opt&0x0080?"false":"true")+"});\"><i class=\"icons "+(i.opt&0x0080?"on":"off")+"\">&#xe08f;</i></button>"):''}
-${inforow("Build",i.vid)}
-${inforow("Signal strength",i.wifi.signal +"% ("+ i.wifi.rssi, " dBm)")}
-${inforow("Uptime",getRuntimeStr(i.uptime))}
-${inforow("Time",i.time)}
-${inforow("Free heap",heap," kB")}
-${i.psram?inforow("Free PSRAM",(i.psram/1024).toFixed(1)," kB"):""}
-${inforow("Estimated current",pwru)}
-${inforow("Average FPS",i.leds.fps)}
-${inforow("MAC address",i.mac)}
-${inforow("Filesystem",i.fs.u + "/" + i.fs.t + " kB (" +Math.round(i.fs.u*100/i.fs.t) + "%)")}
-${inforow("Environment",i.arch + " " + i.core + " (" + i.lwip + ")")}
+${inforow("构建版本",i.vid)}
+${inforow("信号强度",i.wifi.signal +"% ("+ i.wifi.rssi, " dBm)")}
+${inforow("启动时间",getRuntimeStr(i.uptime))}
+${inforow("日期时间",i.time)}
+${inforow("空闲堆栈",heap," kB")}
+${i.psram?inforow("空闲 PSRAM",(i.psram/1024).toFixed(1)," kB"):""}
+${inforow("估计电流",pwru)}
+${inforow("评均 FPS",i.leds.fps)}
+${inforow("MAC 地址",i.mac)}
+${inforow("文件系统",i.fs.u + "/" + i.fs.t + " kB (" +Math.round(i.fs.u*100/i.fs.t) + "%)")}
+${inforow("运行环境",i.arch + " " + i.core + " (" + i.lwip + ")")}
 </table>`;
 	gId('kv').innerHTML = cn;
 	//  update all sliders in Info
@@ -735,12 +735,12 @@ function populateSegments(s)
 		let staY = inst.startY;
 		let stoY = inst.stopY;
 		let isMSeg = isM && staX<mw*mh; // 2D matrix segment
-		let rvXck = `<label class="check revchkl">Reverse ${isM?'':'direction'}<input type="checkbox" id="seg${i}rev" onchange="setRev(${i})" ${inst.rev?"checked":""}><span class="checkmark"></span></label>`;
-		let miXck = `<label class="check revchkl">Mirror<input type="checkbox" id="seg${i}mi" onchange="setMi(${i})" ${inst.mi?"checked":""}><span class="checkmark"></span></label>`;
+		let rvXck = `<label class="check revchkl">倒置 ${isM?'':'方向'}<input type="checkbox" id="seg${i}rev" onchange="setRev(${i})" ${inst.rev?"checked":""}><span class="checkmark"></span></label>`;
+		let miXck = `<label class="check revchkl">镜像<input type="checkbox" id="seg${i}mi" onchange="setMi(${i})" ${inst.mi?"checked":""}><span class="checkmark"></span></label>`;
 		let rvYck = "", miYck ="";
 		if (isMSeg) {
-			rvYck = `<label class="check revchkl">Reverse<input type="checkbox" id="seg${i}rY" onchange="setRevY(${i})" ${inst.rY?"checked":""}><span class="checkmark"></span></label>`;
-			miYck = `<label class="check revchkl">Mirror<input type="checkbox" id="seg${i}mY" onchange="setMiY(${i})" ${inst.mY?"checked":""}><span class="checkmark"></span></label>`;
+			rvYck = `<label class="check revchkl">倒置<input type="checkbox" id="seg${i}rY" onchange="setRevY(${i})" ${inst.rY?"checked":""}><span class="checkmark"></span></label>`;
+			miYck = `<label class="check revchkl">镜像<input type="checkbox" id="seg${i}mY" onchange="setMiY(${i})" ${inst.mY?"checked":""}><span class="checkmark"></span></label>`;
 		}
 		let map2D = `<div id="seg${i}map2D" data-map="map2D" class="lbl-s hide">Expand 1D FX<br>`+
 						`<div class="sel-p"><select class="sel-p" id="seg${i}m12" onchange="setM12(${i})">`+
@@ -763,7 +763,7 @@ function populateSegments(s)
 				`</label>`+
 				`<div class="segname" onclick="selSegEx(${i})">`+
 					`<i class="icons e-icon frz" id="seg${i}frz" onclick="event.preventDefault();tglFreeze(${i});">&#x${inst.frz ? (li.live && li.liveseg==i?'e410':'e0e8') : 'e325'};</i>`+
-					(inst.n ? inst.n : "Segment "+i) +
+					(inst.n ? inst.n : "区段 "+i) +
 					`<div class="pop hide" onclick="event.preventDefault();event.stopPropagation();">`+
 						`<i class="icons g-icon" style="color:${cG};" onclick="this.nextElementSibling.classList.toggle('hide');">&#x278${String.fromCharCode(inst.set+"A".charCodeAt(0))};</i>`+
 						`<div class="pop-c hide"><span style="color:var(--c-f);" onclick="setGrp(${i},0);">&#x278A;</span><span style="color:var(--c-r);" onclick="setGrp(${i},1);">&#x278B;</span><span style="color:var(--c-g);" onclick="setGrp(${i},2);">&#x278C;</span><span style="color:var(--c-l);" onclick="setGrp(${i},3);">&#x278D;</span></div>`+
@@ -776,24 +776,24 @@ function populateSegments(s)
 					`<input type="text" class="ptxt" id="seg${i}t" autocomplete="off" maxlength=${li.arch=="esp8266"?32:64} value="${inst.n?inst.n:""}" placeholder="Enter name..."/>`+
 					`<table class="infot segt">`+
 					`<tr>`+
-						`<td>${isMSeg?'Start X':'Start LED'}</td>`+
-						`<td>${isMSeg?(cfg.comp.seglen?"Width":"Stop X"):(cfg.comp.seglen?"LED count":"Stop LED")}</td>`+
-						`<td>${isMSeg?'':'Offset'}</td>`+
+						`<td>${isMSeg?'Start X':'起始 LED'}</td>`+
+						`<td>${isMSeg?(cfg.comp.seglen?"Width":"Stop X"):(cfg.comp.seglen?"LED count":"终止 LED")}</td>`+
+						`<td>${isMSeg?'':'偏置'}</td>`+
 					`</tr>`+
 					`<tr>`+
 						`<td><input class="segn" id="seg${i}s" type="number" min="0" max="${(isMSeg?mw:ledCount)-1}" value="${staX}" oninput="updateLen(${i})" onkeydown="segEnter(${i})"></td>`+
 						`<td><input class="segn" id="seg${i}e" type="number" min="0" max="${(isMSeg?mw:ledCount)}" value="${stoX-(cfg.comp.seglen?staX:0)}" oninput="updateLen(${i})" onkeydown="segEnter(${i})"></td>`+
 						`<td ${isMSeg?'style="text-align:revert;"':''}>${isMSeg?miXck+'<br>'+rvXck:''}<input class="segn ${isMSeg?'hide':''}" id="seg${i}of" type="number" value="${inst.of}" oninput="updateLen(${i})"></td>`+
 					`</tr>`+
-					(isMSeg ? '<tr><td>Start Y</td><td>'+(cfg.comp.seglen?'Height':'Stop Y')+'</td><td></td></tr>'+
+					(isMSeg ? '<tr><td>起始 Y</td><td>'+(cfg.comp.seglen?'Height':'终止 Y')+'</td><td></td></tr>'+
 					'<tr>'+
 						'<td><input class="segn" id="seg'+i+'sY" type="number" min="0" max="'+(mh-1)+'" value="'+staY+'" oninput="updateLen('+i+')" onkeydown="segEnter('+i+')"></td>'+
 						'<td><input class="segn" id="seg'+i+'eY" type="number" min="0" max="'+mh+'" value="'+(stoY-(cfg.comp.seglen?staY:0))+'" oninput="updateLen('+i+')" onkeydown="segEnter('+i+')"></td>'+
 						'<td style="text-align:revert;">'+miYck+'<br>'+rvYck+'</td>'+
 					'</tr>' : '') +
 					`<tr>`+
-						`<td>Grouping</td>`+
-						`<td>Spacing</td>`+
+						`<td>组别</td>`+
+						`<td>间距</td>`+
 						`<td></td>`+
 					`</tr>`+
 					`<tr>`+
@@ -807,7 +807,7 @@ function populateSegments(s)
 					(isMSeg&&stoY-staY>1&&stoX-staX>1 ? map2D : '') +
 					(s.AudioReactive && s.AudioReactive.on ? "" : sndSim) +
 					`<label class="check revchkl" id="seg${i}lbtm">`+
-						(isMSeg?'Transpose':'Mirror effect') + (isMSeg ?
+						(isMSeg?'Transpose':'镜像效果') + (isMSeg ?
 						'<input type="checkbox" id="seg'+i+'tp" onchange="setTp('+i+')" '+(inst.tp?"checked":"")+'>':
 						'<input type="checkbox" id="seg'+i+'mi" onchange="setMi('+i+')" '+(inst.mi?"checked":"")+'>') +
 						`<span class="checkmark"></span>`+
@@ -1056,7 +1056,7 @@ function loadNodes()
 		method: 'get'
 	})
 	.then((res)=>{
-		if (!res.ok) showToast('Could not load Node list!', true);
+		if (!res.ok) showToast('无法加载节点列表!', true);
 		return res.json();
 	})
 	.then((json)=>{
@@ -1294,8 +1294,8 @@ function updateSelectedFx()
 function displayRover(i,s)
 {
 	gId('rover').style.transform = (i.live && s.lor == 0 && i.liveseg<0) ? "translateY(0px)":"translateY(100%)";
-	var sour = i.lip ? i.lip:""; if (sour.length > 2) sour = " from " + sour;
-	gId('lv').innerHTML = `WLED is receiving live ${i.lm} data${sour}`;
+	var sour = i.lip ? i.lip:""; if (sour.length > 2) sour = " 来自 " + sour;
+	gId('lv').innerHTML = `WLED 正在接收实时 ${i.lm} 数据${sour}`;
 	gId('roverstar').style.display = (i.live && s.lor) ? "block":"none";
 }
 
@@ -1396,7 +1396,7 @@ function readState(s,command=false)
 		hasCCT   = !!(lc & 0x04);
 	}
 	if (!i) {
-		showToast('No Segments!', true);
+		showToast('无区段!', true);
 		updateUI();
 		return true;
 	}
@@ -1427,22 +1427,22 @@ function readState(s,command=false)
 	  var errstr = "";
 	  switch (s.error) {
 		case 10:
-		  errstr = "Could not mount filesystem!";
+		  errstr = "无法挂载文件系统!";
 		  break;
 		case 11:
-		  errstr = "Not enough space to save preset!";
+		  errstr = "保存预设的空间不足!";
 		  break;
 		case 12:
-		  errstr = "Preset not found.";
+		  errstr = "未找到预设。";
 		  break;
 		case 13:
-		  errstr = "Missing ir.json.";
+		  errstr = "缺少 ir.json 文件。";
 		  break;
 		case 19:
-		  errstr = "A filesystem error has occured.";
+		  errstr = "文件系统发生错误。";
 		  break;
 		}
-	  showToast('Error ' + s.error + ": " + errstr, true);
+	  showToast('错误 ' + s.error + ": " + errstr, true);
 	}
 
 	selectedPal = i.pal;
@@ -1572,10 +1572,10 @@ function setEffectParameters(idx)
 			paOnOff[0] = paOnOff[0].substring(0,dPos);
 		}
 		if (paOnOff.length>0 && paOnOff[0] != "!") pall.innerHTML = paOnOff[0];
-		else                                       pall.innerHTML = '<i class="icons sel-icon" onclick="tglHex()">&#xe2b3;</i> Color palette';
+		else                                       pall.innerHTML = '<i class="icons sel-icon" onclick="tglHex()">&#xe2b3;</i> 调色板';
 	} else {
 		// disable palette list
-		pall.innerHTML = '<i class="icons sel-icon" onclick="tglHex()">&#xe2b3;</i> Color palette not used';
+		pall.innerHTML = '<i class="icons sel-icon" onclick="tglHex()">&#xe2b3;</i> 未使用调色板';
 		palw.style.display = "none";
 	}
 	// not all color selectors shown, hide palettes created from color selectors
@@ -1634,7 +1634,7 @@ function requestJson(command=null)
 		lastUpdate = new Date();
 		clearErrorToast(3000);
 		gId('connind').style.backgroundColor = "var(--c-g)";
-		if (!json) { showToast('Empty response', true); return; }
+		if (!json) { showToast('无回复', true); return; }
 		if (json.success) return;
 		if (json.info) {
 			let i = json.info;
@@ -1676,9 +1676,9 @@ function toggleNl()
 	nlA = !nlA;
 	if (nlA)
 	{
-		showToast(`Timer active. Your light will turn ${nlTar > 0 ? "on":"off"} ${nlMode ? "over":"after"} ${nlDur} minutes.`);
+		showToast(`定时器激活,${nlMode ? "超过":"之后"}${nlDur}分钟灯光将${nlTar > 0 ? "开启":"关闭"}`);
 	} else {
-		showToast('Timer deactivated.');
+		showToast('计时器已停用');
 	}
 	var obj = {"nl": {"on": nlA}};
 	requestJson(obj);
@@ -1687,8 +1687,8 @@ function toggleNl()
 function toggleSync()
 {
 	syncSend = !syncSend;
-	if (syncSend) showToast('Other lights in the network will now sync to this one.');
-	else showToast('This light and other lights in the network will no longer sync.');
+	if (syncSend) showToast('网络中的其他 WLED 将与这个 WLED 同步');
+	else showToast('此 WLED 和网络中的其他 WLED 将不再同步');
 	var obj = {"udpn": {"send": syncSend}};
 	if (syncTglRecv) obj.udpn.recv = syncSend;
 	requestJson(obj);
@@ -1756,11 +1756,11 @@ function makeSeg()
 	});
 	var cn = `<div class="seg lstI expanded">`+
 		`<div class="segin">`+
-			`<input type="text" id="seg${lu}t" autocomplete="off" maxlength=32 value="" placeholder="New segment ${lu}"/>`+
+			`<input type="text" id="seg${lu}t" autocomplete="off" maxlength=32 value="" placeholder="新区段 ${lu}"/>`+
 			`<table class="segt">`+
 				`<tr>`+
-					`<td width="38%">${isM?'Start X':'Start LED'}</td>`+
-					`<td width="38%">${isM?(cfg.comp.seglen?"Width":"Stop X"):(cfg.comp.seglen?"LED count":"Stop LED")}</td>`+
+					`<td width="38%">${isM?'Start X':'起始 LED'}</td>`+
+					`<td width="38%">${isM?(cfg.comp.seglen?"Width":"Stop X"):(cfg.comp.seglen?"LED count":"终止 LED")}</td>`+
 				`</tr>`+
 				`<tr>`+
 					`<td><input class="segn" id="seg${lu}s" type="number" min="0" max="${isM?mw-1:ledCount-1}" value="${ns}" oninput="updateLen(${lu})" onkeydown="segEnter(${lu})"></td>`+
@@ -1774,7 +1774,7 @@ function makeSeg()
 				`</tr>`+
 			`</table>`+
 			`<div class="h" id="seg${lu}len">${ledCount - ns} LEDs</div>`+
-			`<div class="c"><button class="btn btn-p" onclick="resetUtil()">Cancel</button></div>`+
+			`<div class="c"><button class="btn btn-p" onclick="resetUtil()">取消</button></div>`+
 		`</div>`+
 	`</div>`;
 	gId('segutil').innerHTML = cn;
@@ -1784,7 +1784,7 @@ function resetUtil(off=false)
 {
 	gId('segutil').innerHTML = `<div class="seg btn btn-s${off?' off':''}" style="padding:0;">`
 	+ '<label class="check schkl"><input type="checkbox" id="selall" onchange="selSegAll(this)"><span class="checkmark"></span></label>'
-	+ `<div class="segname" ${off?'':'onclick="makeSeg()"'}><i class="icons btn-icon">&#xe18a;</i>Add segment</div>`
+	+ `<div class="segname" ${off?'':'onclick="makeSeg()"'}><i class="icons btn-icon">&#xe18a;</i>添加区段</div>`
 	+ '<div class="pop hide" onclick="event.stopPropagation();">'
 	+ `<i class="icons g-icon" onclick="this.nextElementSibling.classList.toggle('hide');">&#xE34B;</i>`
 	+ '<div class="pop-c hide"><span style="color:var(--c-f);" onclick="selGrp(0);">&#x278A;</span><span style="color:var(--c-r);" onclick="selGrp(1);">&#x278B;</span><span style="color:var(--c-g);" onclick="selGrp(2);">&#x278C;</span><span style="color:var(--c-l);" onclick="selGrp(3);">&#x278D;</span></div>'
@@ -1913,21 +1913,21 @@ ${makePlSel(plJson[i].end?plJson[i].end:0, true)}
 		content =
 `<label class="check revchkl">
 	<span class="lstIname">
-	Include brightness
+	包括亮度
 	</span>
 	<input type="checkbox" id="p${i}ibtgl" checked>
 	<span class="checkmark"></span>
 </label>
 <label class="check revchkl">
 	<span class="lstIname">
-	Save segment bounds
+	保存区段边界
 	</span>
 	<input type="checkbox" id="p${i}sbtgl" checked>
 	<span class="checkmark"></span>
 </label>
 <label class="check revchkl">
 	<span class="lstIname">
-	Checked segments only
+	仅检查区段
 	</span>
 	<input type="checkbox" id="p${i}sbchk">
 	<span class="checkmark"></span>
@@ -1939,24 +1939,24 @@ ${makePlSel(plJson[i].end?plJson[i].end:0, true)}
 		}
 	}
 
-	return `<input type="text" class="ptxt ${i==0?'show':''}" id="p${i}txt" autocomplete="off" maxlength=32 value="${(i>0)?pName(i):""}" placeholder="Enter name..."/>
-<div class="c">Quick load label: <input type="text" class="stxt" maxlength=2 value="${qlName(i)}" id="p${i}ql" autocomplete="off"/></div>
-<div class="h">(leave empty for no Quick load button)</div>
+	return `<input type="text" class="ptxt ${i==0?'show':''}" id="p${i}txt" autocomplete="off" maxlength=32 value="${(i>0)?pName(i):""}" placeholder="输入名称..."/>
+<div class="c">快捷标签: <input type="text" class="stxt" maxlength=2 value="${qlName(i)}" id="p${i}ql" autocomplete="off"/></div>
+<div class="h">(留空表示无快捷按钮)</div>
 <div ${pl&&i==0?"style='display:none'":""}>
 <label class="check revchkl">
 	<span class="lstIname">
-	${pl?"Show playlist editor":(i>0)?"Overwrite with state":"Use current state"}
+	${pl?"显示播放列表编辑器":(i>0)?"使用覆盖状态":"使用当前状态"}
 	</span>
 	<input type="checkbox" id="p${i}cstgl" onchange="tglCs(${i})" ${(i==0||pl)?"checked":""}>
 	<span class="checkmark"></span>
 </label>
 </div>
-<div class="po2" id="p${i}o2">API command<br><textarea class="apitxt" id="p${i}api"></textarea></div>
+<div class="po2" id="p${i}o2">API 命令<br><textarea class="apitxt" id="p${i}api"></textarea></div>
 <div class="po1" id="p${i}o1">${content}</div>
-<div class="c m6">Save to ID <input id="p${i}id" type="number" oninput="checkUsed(${i})" max=250 min=1 value=${(i>0)?i:getLowestUnusedP()}></div>
+<div class="c m6">保存为 ID<input id="p${i}id" type="number" oninput="checkUsed(${i})" max=250 min=1 value=${(i>0)?i:getLowestUnusedP()}></div>
 <div class="c">
-	<button class="btn btn-p" onclick="saveP(${i},${pl})"><i class="icons btn-icon">&#xe390;</i>Save</button>
-	${(i>0)?'<button class="btn btn-p" id="p'+i+'del" onclick="delP('+i+')"><i class="icons btn-icon">&#xe037;</i>Delete':'<button class="btn btn-p" onclick="resetPUtil()">Cancel'}</button>
+	<button class="btn btn-p" onclick="saveP(${i},${pl})"><i class="icons btn-icon">&#xe390;</i>保存</button>
+	${(i>0)?'<button class="btn btn-p" id="p'+i+'del" onclick="delP('+i+')"><i class="icons btn-icon">&#xe037;</i>删除':'<button class="btn btn-p" onclick="resetPUtil()">取消'}</button>
 </div>
 <div class="pwarn ${(i>0)?"bp":""} c" id="p${i}warn"></div>
 ${(i>0)? ('<div class="h">ID ' +i+ '</div>'):""}`;
@@ -2009,7 +2009,7 @@ function makePlEntry(p,i)
 function makePlUtil()
 {
 	if (pNum < 2) {
-		showToast("You need at least 2 presets to make a playlist!"); //return;
+		showToast("制作播放列表至少需要 2 个预设!"); //return;
 	}
 	let p = gId('putil');
 	p.classList.remove('staybot');
@@ -2030,8 +2030,8 @@ function resetPUtil()
 	let p = gId('putil');
 	p.classList.add('staybot');
 	p.classList.remove('pres');
-	p.innerHTML = `<button class="btn btn-s" onclick="makePUtil()" style="float:left;"><i class="icons btn-icon">&#xe18a;</i>Preset</button>`
-	+ `<button class="btn btn-s" onclick="makePlUtil()" style="float:right;"><i class="icons btn-icon">&#xe18a;</i>Playlist</button>`;
+	p.innerHTML = `<button class="btn btn-s" onclick="makePUtil()" style="float:left;"><i class="icons btn-icon">&#xe18a;</i>添加预设</button>`
+	+ `<button class="btn btn-s" onclick="makePlUtil()" style="float:right;"><i class="icons btn-icon">&#xe18a;</i>播放列表</button>`;
 }
 
 function tglCs(i)
@@ -2152,7 +2152,7 @@ function setSeg(s)
 function delSeg(s)
 {
 	if (segCount < 2) {
-		showToast("You need to have multiple segments to delete one!");
+		showToast("需要有多个区段才能删除这个区段!");
 		return;
 	}
 	segCount--;
@@ -2321,7 +2321,7 @@ function setPreset(i)
 		delete obj.n;  // no need for name
 	}
 	if (isPlaylist(i)) obj.on = true; // force on
-	showToast("Loading preset " + pName(i) +" (" + i + ")");
+	showToast("预设加载中 " + pName(i) +" (" + i + ")");
 	requestJson(obj);
 }
 
@@ -2368,7 +2368,7 @@ function saveP(i,pl)
 	var pQN = gId(`p${i}ql`).value;
 	if (pQN.length > 0) obj.ql = pQN;
 
-	showToast("Saving " + pN +" (" + pI + ")");
+	showToast("保存中 " + pN +" (" + pI + ")");
 	requestJson(obj);
 	if (obj.o) {
 		pJson[pI] = obj;
@@ -2619,7 +2619,7 @@ function cnfReset()
 	if (!cnfr) {
 		var bt = gId('resetbtn');
 		bt.style.color = "var(--c-r)";
-		bt.innerHTML = "Confirm Reboot";
+		bt.innerHTML = "确认重启";
 		cnfr = true; return;
 	}
 	window.location.href = getURL("/reset");

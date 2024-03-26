@@ -3,7 +3,7 @@
 <head>
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
 	<meta charset="utf-8">
-	<title>DMX Settings</title>
+	<title>DMX 实例</title>
 	<script>
 	var d=document;
 	var loc = false, locip, locproto = "http:";
@@ -84,23 +84,23 @@
 <form id="form_s" name="Sf" method="post">
 <div class="toprow">
 <div class="helpB"><button type="button" onclick="H()">?</button></div>
-<button type="button" onclick="B()">Back</button><button type="submit">Save</button><hr>
+<button type="button" onclick="B()">返回</button><button type="submit">保存</button><hr>
 </div>
-<h2>Imma firin ma lazer (if it has DMX support)</h2><!-- TODO: Change to something less-meme-related //-->
+<h2>Imma firin ma lazer(如果有 DMX 支持)</h2><!-- TODO: Change to something less-meme-related //-->
 
-Proxy Universe <input name=PU type=number min=0 max=63999 required> from E1.31 to DMX (0=disabled)<br>
-<i>This will disable the LED data output to DMX configurable below</i><br><br>
-<i>Number of fixtures is taken from LED config page</i><br>
+通用代理 <input name=PU type=number min=0 max=63999 required> 从 E1.31 到 DMX(0=禁用)<br>
+<i>这将禁用 LED 数据输出到 DMX，可在下面配置</i><br><br>
+<i>灯数量取自 LED 配置页面</i><br>
 
-Channels per fixture (15 max): <input type="number" min="1" max="15" name="CN" maxlength="2" onchange="mMap();"><br />
-Start channel: <input type="number" min="1" max="512" name="CS" maxlength="2"><br />
-Spacing between start channels: <input type="number" min="1" max="512" name="CG" maxlength="2" onchange="mMap();"> [ <a href="javascript:alert('if set to 10, first fixture will start at 10,\nsecond will start at 20 etc.\nRegardless of the channel count.\nMakes memorizing channel numbers easier.');">info</a> ]<br>
-<div id="gapwarning" style="color: orange; display: none;">WARNING: Channel gap is lower than channels per fixture.<br />This will cause overlap.</div>
-<button type="button" onclick="location.href='/dmxmap';">DMX Map</button><br>
-DMX fixtures start LED: <input type="number" min="0" max="1500" name="SL">
-<h3>Channel functions</h3>
+每个控制器的通道数(最大 15 个):  <input type="number" min="1" max="15" name="CN" maxlength="2" onchange="mMap();"><br />
+初始通道: <input type="number" min="1" max="512" name="CS" maxlength="2"><br />
+通道间距: <input type="number" min="1" max="512" name="CG" maxlength="2" onchange="mMap();"> [ <a href="javascript:alert('如果配置为 10，则第一个灯条将从 10 点开始，\n第二个灯条将从 20 点开始，依此类推。\n无论通道数如何，这样记忆通道号更简单。');">info</a> ]<br>
+<div id="gapwarning" style="color: orange; display: none;">警告: 通道间距小于每个灯条的通道。<br/>这将导致效果重叠。</div>
+<button type="button" onclick="location.href='/dmxmap';">DMX 图示</button><br>
+DMX 灯条启动 LED: <input type="number" min="0" max="1500" name="SL">
+<h3>通道功能</h3>
 <div id="dmxchannels"></div>
-<hr><button type="button" onclick="B()">Back</button><button type="submit">Save</button>
+<hr><button type="button" onclick="B()">返回</button><button type="submit">保存</button>
 </form>
 </body>
 </html>

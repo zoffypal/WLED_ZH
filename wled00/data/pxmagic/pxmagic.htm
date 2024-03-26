@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="author" content="@ajotanc" />
 
-    <title>Pixel Magic Tool</title>
+    <title>像素魔法工具</title>
 
     <style>
       :root {
@@ -565,11 +565,11 @@
           </div>
           <div class="row">
             <div class="column" validate>
-              <label for="hostname">Hostname</label>
+              <label for="hostname">主机名称</label>
               <input type="text" name="hostname" id="hostname" required />
             </div>
             <div class="column" validate>
-              <label for="name">Preset Name</label>
+              <label for="name">预设名称</label>
               <input
                 type="text"
                 name="name"
@@ -581,9 +581,9 @@
           <div class="row">
             <div class="column" validate>
               <div class="custom-select">
-                <label for="pattern">Pattern</label>
+                <label for="pattern">图案</label>
                 <select name="pattern" id="pattern" required>
-                  <option value="">Select a choice</option>
+                  <option value="">选择</option>
                   <option value="1" title="['ffffff']">Individual</option>
                   <option value="2" title="[0, 'ffffff']">Index</option>
                   <option value="3" title="[0, 5, 'ffffff']" selected>
@@ -594,9 +594,9 @@
             </div>
             <div class="column" validate>
               <div class="custom-select">
-                <label for="output">Output</label>
+                <label for="output">输出</label>
                 <select name="output" id="output" required>
-                  <option value="">Select a choice</option>
+                  <option value="">选择</option>
                   <option value="json" selected>WLED JSON</option>
                   <option value="ha">Home Assistant</option>
                   <option value="curl">CURL</option>
@@ -606,15 +606,15 @@
           </div>
           <div class="row output" style="display: none">
             <div class="column" validate>
-              <label for="device">Device</label>
+              <label for="device">设备</label>
               <input type="text" name="device" id="device" required />
             </div>
             <div class="column" validate>
-              <label for="uniqueId">Unique Id</label>
+              <label for="uniqueId">唯一 Id</label>
               <input type="text" name="uniqueId" id="uniqueId" required />
             </div>
             <div class="column" validate>
-              <label for="friendlyName">Friendly Name</label>
+              <label for="friendlyName">昵称</label>
               <input
                 type="text"
                 name="friendlyName"
@@ -625,16 +625,16 @@
           <div class="row">
             <div class="column" validate>
               <div class="custom-select">
-                <label for="segments">Segment Id</label>
+                <label for="segments">区段 Id</label>
                 <select name="segments" id="segments">
                   <option value="0" data-width="16" data-height="16">
-                    Segment 0
+                    区段 0
                   </option>
                 </select>
               </div>
             </div>
             <div class="column" validate>
-              <label for="brightness">Brightness</label>
+              <label for="brightness">亮度</label>
               <div class="input-group">
                 <input
                   type="range"
@@ -656,7 +656,7 @@
           </div>
           <div class="row">
             <div class="column" validate>
-              <label for="animation">Animation</label>
+              <label for="animation">动画</label>
               <label class="switch">
                 <input
                   type="checkbox"
@@ -667,7 +667,7 @@
               </label>
             </div>
             <div class="column" validate>
-              <label for="transparentImage">Transparent Image</label>
+              <label for="transparentImage">透明图像</label>
               <label class="switch">
                 <input
                   type="checkbox"
@@ -678,7 +678,7 @@
               </label>
             </div>
             <div class="column" validate>
-              <label for="resizeImage">Resize Image</label>
+              <label for="resizeImage">调整图像</label>
               <label class="switch">
                 <input
                   type="checkbox"
@@ -692,21 +692,21 @@
           </div>
           <div class="row resizeImage">
             <div class="column" validate>
-              <label for="width">Width</label>
+              <label for="width">宽度</label>
               <input type="number" name="width" id="width" value="16" />
             </div>
             <div class="column" validate>
-              <label for="height">Height</label>
+              <label for="height">高度</label>
               <input type="number" name="height" id="height" value="16" />
             </div>
           </div>
           <div class="row animation" style="display: none">
             <div class="column" validate>
-              <label for="frames">Frames</label>
+              <label for="frames">边框</label>
               <input type="number" name="frames" id="frames" value="4" />
             </div>
             <div class="column" validate>
-              <label for="duration">Duration</label>
+              <label for="duration">时间</label>
               <div class="input-group">
                 <input
                   type="number"
@@ -718,12 +718,12 @@
                   step="0.1"
                   inputmode="numeric" />
                 <div class="input-description">
-                  <span>sec</span>
+                  <span>秒</span>
                 </div>
               </div>
             </div>
             <div class="column" validate>
-              <label for="transition">Transition</label>
+              <label for="transition">过渡</label>
               <div class="input-group">
                 <input
                   type="number"
@@ -735,17 +735,17 @@
                   step="0.1"
                   inputmode="numeric" />
                 <div class="input-description">
-                  <span>sec</span>
+                  <span>秒</span>
                 </div>
               </div>
             </div>
           </div>
           <div class="row transparentImage" style="display: none">
             <div class="column-full" validate>
-              <label for="color">Choose a color</label>
+              <label for="color">选择色彩</label>
               <small>
-                Color that will replace the
-                <strong>transparent pixels</strong> in the image
+                选择的色彩将会取代
+                <strong>透明像素</strong> 
               </small>
               <input type="color" name="color" id="color" value="#00BFFF" />
             </div>
@@ -754,20 +754,20 @@
             <div class="column-full" validate>
               <div class="custom-select">
                 <label for="images">
-                  <span>Images upload to WLED</span>
+                  <span>图片上传到 WLED</span>
                   <a id="wledEdit" href="http://[wled-ip]/edit" target="_blank">
-                    upload
+                    上传
                   </a>
                 </label>
                 <select name="images" id="images">
-                  <option value="">Select image</option>
+                  <option value="">选择图像</option>
                 </select>
               </div>
             </div>
           </div>
           <div id="dropzone" class="dropzone" validate>
             <p id="dropzoneLabel">
-              Drag and drop a file here or click to select a local file
+              在此拖放文件或单击选择文件
             </p>
             <input
               type="file"
@@ -779,7 +779,7 @@
           <div class="row">
             <div class="column-full">
               <button type="button" class="button" id="btnGenerate">
-                Generate
+                生成
               </button>
             </div>
           </div>
@@ -792,7 +792,7 @@
             <div class="row">
               <div class="column">
                 <button type="button" class="button" id="btnCopyToClipboard">
-                  Copy to Clipboard
+                  复制到剪贴板
                 </button>
               </div>
               <div class="column">
@@ -800,14 +800,14 @@
               </div>
               <div class="column">
                 <button type="button" class="button" id="btnDownloadPreset">
-                  Download
+                  下载
                 </button>
               </div>
             </div>
             <div class="row" id="simulate" style="display: none">
               <div class="column-full">
                 <button type="button" class="button" id="btnSimulatePreset">
-                  Simulate
+                  模拟
                 </button>
               </div>
             </div>
