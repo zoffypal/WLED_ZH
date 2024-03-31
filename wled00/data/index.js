@@ -686,7 +686,7 @@ ${inforow("日期时间",i.time)}
 ${inforow("空闲堆栈",heap," kB")}
 ${i.psram?inforow("空闲 PSRAM",(i.psram/1024).toFixed(1)," kB"):""}
 ${inforow("估计电流",pwru)}
-${inforow("评均 FPS",i.leds.fps)}
+${inforow("平均 FPS",i.leds.fps)}
 ${inforow("MAC 地址",i.mac)}
 ${inforow("文件系统",i.fs.u + "/" + i.fs.t + " kB (" +Math.round(i.fs.u*100/i.fs.t) + "%)")}
 ${inforow("运行环境",i.arch + " " + i.core + " (" + i.lwip + ")")}
@@ -1041,10 +1041,10 @@ function populateNodes(i,n)
 			}
 		}
 	}
-	if (i.ndc < 0) cn += `Instance List is disabled.`;
-	else if (nnodes == 0) cn += `No other instances found.`;
+	if (i.ndc < 0) cn += `实例列表已禁用。`;
+	else if (nnodes == 0) cn += `没有发现其他实例。`;
 	cn += `<table>
-	${inforow("Current instance:",i.name)}
+	${inforow("当前实例: ",i.name)}
 	${urows}
 	</table>`;
 	gId('kn').innerHTML = cn;
@@ -1056,7 +1056,7 @@ function loadNodes()
 		method: 'get'
 	})
 	.then((res)=>{
-		if (!res.ok) showToast('无法加载节点列表!', true);
+		if (!res.ok) showToast('无法加载实例列表!', true);
 		return res.json();
 	})
 	.then((json)=>{

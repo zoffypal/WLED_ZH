@@ -39,11 +39,11 @@
 - E1.31、Art-Net、DDP 和 TPM2.net
 - [diyHue](https://github.com/diyhue/diyHue) (Wled 由 diyHue 支持，包括 udp 下的 Hue Sync Entertainment。感谢 [Gregory Mallios](https://github.com/gmallios))
 - [hyperion](https://github.com/hyperion-project/hyperion.ng)
-- UDP实时 
-- Alexa语音控制(包括调光和颜色) 
+- UDP 实时 
+- Alexa 语音控制(包括调光和颜色) 
 - 与飞利浦色调灯同步 
 - Adalight(通过串行的 PC 流光溢彩)和 TPM2 
-- 多个WLED器件的同步颜色(UDP通知器) 
+- 多个 WLED 器件的同步颜色(UDP 通知器) 
 - 红外遥控器(24键RGB，需要接收器) 
 - 简单的计时器/时间表(来自 NTP 的时间，支持时区/DST) 
 
